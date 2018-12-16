@@ -1,0 +1,266 @@
+\documentclass{scrartcl}
+
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{natbib}
+\usepackage{hyperref}
+
+\usepackage{graphicx}
+
+\usepackage[colorinlistoftodos]{todonotes}
+
+% \usepackage{parskip}
+% \setlength{\parskip}{10pt}
+
+\usepackage{tikz}
+\usetikzlibrary{arrows, decorations.markings}
+
+\usepackage{chngcntr}
+\counterwithout{figure}{section}
+
+
+
+\begin{document}
+
+
+\begin{titlepage}
+
+
+\centering
+
+
+{\scshape\LARGE Master thesis project proposal\\}
+
+\vspace{0.5cm}
+
+{\huge\bfseries Symbolic Functional FEEC\\}
+
+\vspace{2cm}
+
+{\Large Jakob Larsson <jakob@karljakoblarsson.com>\\}
+
+
+\vspace{1.0cm}
+
+{\large Suggested Supervisor at CSE: Patrik Jansson \\}
+
+% \vspace{1.5cm}
+
+% {\large Supervisor at Company (if applicable): Name of supervisor, name of company\\}
+
+\vspace{1.5cm}
+
+{\large Relevant completed courses:\par}
+
+{\itshape
+Types for Programs and Proofs, DAT350 \\
+Advanced Functional programming, TDA342 \\
+}
+
+% \vspace{1.5cm}
+% {\large Relevant completed courses student 2:\par}
+% {\itshape List (course code, name of course)\\}
+% \vfill
+
+\vfill
+{\large \today\\}
+\end{titlepage}
+
+
+% Draft 2
+%
+%
+
+\section{Introduction}
+
+% Briefly describe and motivate the project, and convince the reader of the
+% importance of the proposed thesis work.  A good introduction will answer these
+% questions: Why is addressing these challenges significant for gaining new
+% knowledge in the studied domain? How and where can this new knowledge be
+% applied?
+
+Writing correct software is hard.
+Functional programming proposes several techniques to make it easier.
+One technique is to embed domain specific objects and terms in the programming
+language, a so called Domain Specific Language, or DSL.
+In this thesis we wish to investigate how a DSL
+corresponding the mathematics used can improve an existing software project.
+
+FEniCS is a project which aim to develop a automatic solver for Partial
+Differential Equations. The current solver is written in C++ with an interface
+in Python. A intermediate description of the problems involved is Finite Element
+Exterior Calculus, or FEEC. There exists a functional implementation of FEEC
+written in Haskell called FEECa~\footnote{https://github.com/Airini/FEECa}.
+However the implementation is numerical, we wish to investigate a symbolic
+implementation.  The thesis is that a symbolic implementation could both allow
+for mathematical simplifications which improves the precision and allow for
+automated testing of the program.
+
+
+% During that project they have developed Finite Element Exterior -->
+% [> havent mentioned the solver <] -->
+% Calculus FEEC \ref{winter} as a intermediate building block for the solver.  In -->
+% addition to the main implementation in C++ there exists a work-in-progress -->
+% functional implementation in Haskell \ref{feeca}. The current implementation is -->
+% [> numeric vs numerical vs approx <] -->
+% numeric. We wish to leverage Haskell's rich type system to implement a symbolic -->
+% version. -->
+
+
+% [> DSL <] -->
+% A symbolic Domain Specific Language would allow many algebraic manipulations -->
+% which could improve the output. It could also enable use of automatic theorem -->
+% provers to guarantee correctness. This could find bugs which would benefit the -->
+% main implementation. -->
+
+% The current implementation Finite Element Exterior Calculus in Haskell (FEECa)
+% uses machine-bound Int64 as the main datatype. Our plan is to implement
+% a datatype which better captures the semantics of the underlying mathematical
+% objects. The thesis is that a more specific datatype could allow for better
+% solutions.
+
+A DSL which leverages Haskell's type system has many advantages in theory. If
+implemented correctly, the compiler could catch purely mathematical errors in
+the input. The naive approach is to implement the algebraic structures used
+as types. However, solving of Partial Differential Equations usually involves
+taking the magnitude of vectors. The implementation of magnitude uses the
+square root which is not available in the common algebraic structures. This is
+a big problem in this project.
+
+% <!-- unclear, will depend on availible time -->
+% It would also be interesting if a more specific data type allow use
+% to prove the implementation correct, but that could be for another project.
+
+% The involves thakeing the norm of vectors, this involes taking the square root
+% which is hard to fit in a good algebra.
+
+% <!-- Why is the planned research a significant step forward? What are the -->
+% <!-- scientific challenges. What is hard and non-obvious? -->
+% <!-- What problem exisits? What are the current solutions and their drawbacks? -->
+
+
+
+% \section{Context}
+
+% Use one or two relevant and high quality references for providing evidence from
+% the literature that the proposed study indeed includes scientific and
+% engineering challenges, or is related to existing ones. Convince the reader
+% that the problem addressed in this thesis has not been solved prior to this
+% project.
+
+
+
+\section{Goals and Challenges}
+% Describe your contribution with respect to concepts, theory and technical
+% goals. Ensure that the scientific and engineering challenges stand out so that
+% the reader can easily recognize that you are planning to solve an advanced
+% problem.
+
+% Goals
+% =====
+
+% TODO. To implement a symbolic datatype for the FEECa project. And show that it
+% improves results. Or allows for automated testing of correctness proofs.
+
+The goal is the implement a symbolic functional version of Finite Exterior
+Calculus.
+Then we want to show that this version improves on the existing implementation.
+Either by showing that the symbolic implementation allows for algebraic
+simplifications which improves the results. Or that the Haskell implementation
+allows us to use automated verification to prove the implementation correct.
+
+% Describe your contribution with respect to concepts, theory and technical -->
+% goals. Ensure that the scientific and engineering challenges stand out so that -->
+% the reader can easily recognize that you are planning to solve an advanced -->
+% problem. -->
+
+% Challanges
+% ==========
+Since this is a continuation of a previous project, a big challenge is to judge the quality
+of the current FEECa implementation.
+It is impossible to do a complete investigation of the available code at this stage.
+This is a big uncertainty in the project.
+
+% <!-- vague paragraph -->
+% <!-- careful with strong statements about bugs -->
+It is hard to scientifically evaluate measures to improve the quality of code.
+Bugs are hard to use in controlled experiments, therefore it is hard to show
+that a new implementation is better than another.
+
+
+
+\section{Approach}
+
+% Various scientific approaches are appropriate for different challenges and
+% project goals. Outline and justify the ones that you have selected. For
+% example, when your project considers systematic data collection, you need to
+% explain how you will analyze the data, in order to address your challenges and
+% project goals.
+
+% One scientific approach is to use formal models and rigorous mathematical
+% argumentation to address aspects like correctness and efficiency. If this is
+% relevant, describe the related algorithmic subjects, and how you plan to
+% address the studied problem. For example, if your plan is to study the problem
+% from a computability aspect, address the relevant issues, such as algorithm and
+% data structure design, complexity analysis, etc.  If you plan to develop and
+% evaluate a prototype, briefly describe your plans to design, implement, and
+% evaluate your prototype by reviewing at most two relevant issues, such as key
+% functionalities and their evaluation criteria.
+
+% The design and implementation should specify prototype properties, such as
+% functionalities and performance goals, e.g., scalability, memory, energy.
+% Motivate key design selection, with respect to state of the art and existing
+% platforms, libraries, etc.
+
+% When discussing evaluation criteria, describe the testing environment, e.g.,
+% test-bed experiments, simulation, and user studies, which you plan to use when
+% assessing your prototype. Specify key tools, and preliminary test-case
+% scenarios. Explain how and why you plan to use the evaluation criteria in order
+% to demonstrate the functionalities and design goals. Explain how you plan to
+% compare your prototype to the state of the art using the proposed test-case
+% evaluation scenarios and benchmarks.
+
+
+The first step is to find a suitable embedding or data-types. We need to evaluate
+which algebraic structures gives us the best compromise between usability and
+the needed semantics. The next step is to develop the FEECa implementation to
+use our new data-types.
+
+The evaluation will be done by comparing the results of our Symbolic FEECa
+implementation with the main implementation.
+% <!-- more details -->
+The ambition is to use automated
+testing, like QuickCheck, to do this.
+
+It would also be very interesting to try to prove the correctness of the
+implementation. To do it completely is almost impossible but only proving some
+part could potentially find many bugs in the main implementation.
+
+
+
+
+% Ethics
+% ======
+
+% <!-- redo this totally -->
+% <!-- or maybe skip for now and just take the revision -->
+% <!-- should not be part of real proposal, only for CSS -->
+% This proposal is close to basic research in programming languages and category
+% theory. The most immediate consequences possible is to improve the quality of
+% a PDE solver. This can not directly have any negative ethical consequences.
+% PDE's occur in the solutions of most interesting physical problems. The
+% problems to solve could of course be immoral, but improving the solutions
+% a little bit is not going to affect the end result.
+
+
+% \section{References}
+
+
+
+\bibliographystyle{plain}
+
+\bibliography{sfeeca}
+
+
+\end{document}
