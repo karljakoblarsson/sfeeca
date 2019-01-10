@@ -1,63 +1,39 @@
 \documentclass{scrartcl}
 
-
 \usepackage[utf8]{inputenc}
 
 \usepackage{natbib}
 \usepackage{hyperref}
-
 \usepackage{graphicx}
-
 \usepackage[colorinlistoftodos]{todonotes}
-
 % \usepackage{parskip}
 % \setlength{\parskip}{10pt}
-
 \usepackage{tikz}
 \usetikzlibrary{arrows, decorations.markings}
-
 \usepackage{chngcntr}
 \counterwithout{figure}{section}
 
 
-
 \begin{document}
-
 
 \begin{titlepage}
 
-
 \centering
-
-
 {\scshape\LARGE Master thesis project proposal\\}
-
 \vspace{0.5cm}
-
 {\huge\bfseries Symbolic Functional FEEC\\}
-
 \vspace{2cm}
-
 {\Large Jakob Larsson <jakob@karljakoblarsson.com>\\}
-
-
 \vspace{1.0cm}
-
 {\large Suggested Supervisor at CSE: Patrik Jansson \\}
-
 % \vspace{1.5cm}
-
 % {\large Supervisor at Company (if applicable): Name of supervisor, name of company\\}
-
 \vspace{1.5cm}
-
 {\large Relevant completed courses:\par}
-
 {\itshape
 Types for Programs and Proofs, DAT350 \\
 Advanced Functional programming, TDA342 \\
 }
-
 % \vspace{1.5cm}
 % {\large Relevant completed courses student 2:\par}
 % {\itshape List (course code, name of course)\\}
@@ -68,7 +44,7 @@ Advanced Functional programming, TDA342 \\
 \end{titlepage}
 
 
-% Draft 2
+% Draft 3 I guess
 %
 %
 
@@ -87,15 +63,16 @@ language, a so called Domain Specific Language, or DSL.
 In this thesis we wish to investigate how a DSL
 corresponding the mathematics used can improve an existing software project.
 
-FEniCS is a project which aim to develop a automatic solver for Partial
-Differential Equations. The current solver is written in C++ with an interface
-in Python. A intermediate description of the problems involved is Finite Element
-Exterior Calculus, or FEEC. There exists a functional implementation of FEEC
-written in Haskell called FEECa~\footnote{https://github.com/Airini/FEECa}.
-However the implementation is numerical, we wish to investigate a symbolic
-implementation.  The thesis is that a symbolic implementation could both allow
-for mathematical simplifications which improves the precision and allow for
-automated testing of the program.
+FEniCS~\cite{AlnaesBlechta2015a} is a project which aim to develop a automatic
+solver for Partial Differential Equations. The current solver is written in C++
+with an interface in Python. A intermediate description of the problems
+involved is Finite Element Exterior Calculus, or FEEC.~\cite{arnold2006finite}
+There exists a functional implementation of FEEC written in Haskell called
+FEECa~\footnote{https://github.com/Airini/FEECa}.  However the implementation
+is numerical, we wish to investigate a symbolic implementation.  The thesis is
+that a symbolic implementation could both allow for mathematical
+simplifications which improves the precision and allow for automated testing of
+the program.
 
 
 % During that project they have developed Finite Element Exterior -->
@@ -120,6 +97,8 @@ automated testing of the program.
 % objects. The thesis is that a more specific datatype could allow for better
 % solutions.
 
+% TODO To say that the compiler could catch purley mathematical errors in the
+% input is a very strong statement and maybe not true.
 A DSL which leverages Haskell's type system has many advantages in theory. If
 implemented correctly, the compiler could catch purely mathematical errors in
 the input. The naive approach is to implement the algebraic structures used
@@ -127,6 +106,15 @@ as types. However, solving of Partial Differential Equations usually involves
 taking the magnitude of vectors. The implementation of magnitude uses the
 square root which is not available in the common algebraic structures. This is
 a big problem in this project.
+
+% TODO Expand on how to model the problems and algebraic structures. What do we
+% want to model and what are the benefits and problems with that?
+
+We want to model the structure:
+Polynomial → Monoid → Ring → Field → Vector Space
+But how do I describe that (which I don't really understand) in a succint way?
+
+
 
 % <!-- unclear, will depend on availible time -->
 % It would also be interesting if a more specific data type allow use
@@ -160,15 +148,25 @@ a big problem in this project.
 % Goals
 % =====
 
-% TODO. To implement a symbolic datatype for the FEECa project. And show that it
+% To implement a symbolic datatype for the FEECa project. And show that it
 % improves results. Or allows for automated testing of correctness proofs.
 
+% TODO This first sentence is the money sentence. Is this really the problem
+% we're solving. Is it the most succint problem-formulation?
+% The goal is the implement a symbolic functional version of Finite Exterior
+% Calculus. Do I need to explain more about what symbolic and functional means
+% and the theoretical benefits?
+% Do I need to describe FEEC more here? Or is it enough to cite the paper?
+
 The goal is the implement a symbolic functional version of Finite Exterior
-Calculus.
-Then we want to show that this version improves on the existing implementation.
-Either by showing that the symbolic implementation allows for algebraic
-simplifications which improves the results. Or that the Haskell implementation
-allows us to use automated verification to prove the implementation correct.
+Calculus.  Then we want to show that this version improves on the existing
+implementation.  Either by showing that the symbolic implementation allows for
+algebraic simplifications which improves the results. Or that the Haskell
+implementation allows us to use automated verification to prove the
+implementation correct.
+
+% TODO Decide if algebraic simplification or automated testing is the main focus,
+% discuss with Patrik. AAAAARGH!
 
 % Describe your contribution with respect to concepts, theory and technical -->
 % goals. Ensure that the scientific and engineering challenges stand out so that -->
@@ -177,6 +175,9 @@ allows us to use automated verification to prove the implementation correct.
 
 % Challanges
 % ==========
+% TODO Maybe describe the availible code and info more? More clearly at least.
+% There is a half finished but abandond project availible, it is probaly in
+% worse state the expected.
 Since this is a continuation of a previous project, a big challenge is to judge the quality
 of the current FEECa implementation.
 It is impossible to do a complete investigation of the available code at this stage.
@@ -184,6 +185,9 @@ This is a big uncertainty in the project.
 
 % <!-- vague paragraph -->
 % <!-- careful with strong statements about bugs -->
+% TODO Is this important to mention? Is bugs and code quality really a focus of
+% this project? Maybe not, this doesn't give any new or interesting
+% information.
 It is hard to scientifically evaluate measures to improve the quality of code.
 Bugs are hard to use in controlled experiments, therefore it is hard to show
 that a new implementation is better than another.
@@ -222,27 +226,37 @@ that a new implementation is better than another.
 % evaluation scenarios and benchmarks.
 
 
+% TODO Is usability a goal? Or only "power" of the embedding?
+% How do you talk about "usability" in PL research settings?
 The first step is to find a suitable embedding or data-types. We need to evaluate
 which algebraic structures gives us the best compromise between usability and
 the needed semantics. The next step is to develop the FEECa implementation to
 use our new data-types.
+% TODO Should I really start from the current FEECa or should I start seperatly
+% and then integrate that code with my DSL and embeddings? I don't think
+% I should included that in the proposal.
 
 The evaluation will be done by comparing the results of our Symbolic FEECa
 implementation with the main implementation.
 % <!-- more details -->
 The ambition is to use automated
-testing, like QuickCheck, to do this.
+testing, like QuickCheck,~\cite{claessen_quickcheck_2000} to do this.
+% TODO Again, decide if simplification or testing is the main goal of all this.
 
+% TODO this is a total aside, maybe interesting thoughts, but it does not
+% belong in the conclusion. This as well, probably not good to include here in
+% the proposal.
 It would also be very interesting to try to prove the correctness of the
 implementation. To do it completely is almost impossible but only proving some
 part could potentially find many bugs in the main implementation.
 
 
+% TODO What is missing from this draft, except for the TODOs above?
+% I'm not sure.
 
 
 % Ethics
 % ======
-
 % <!-- redo this totally -->
 % <!-- or maybe skip for now and just take the revision -->
 % <!-- should not be part of real proposal, only for CSS -->
@@ -254,13 +268,13 @@ part could potentially find many bugs in the main implementation.
 % a little bit is not going to affect the end result.
 
 
-% \section{References}
-
-
 
 \bibliographystyle{plain}
 
 \bibliography{sfeeca}
 
+% Useful citations list
+% \cite{arnold2006finite} % FEEC
+% \cite{AlnaesBlechta2015a} % The FENICS project 1.5
 
 \end{document}
