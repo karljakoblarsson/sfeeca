@@ -60,20 +60,10 @@ Advanced Functional programming, TDA342 \\
 Writing correct software is hard.
 Functional programming proposes several techniques to make it easier.
 One technique is to embed domain specific objects and terms in the programming
-language, a so called Domain Specific Language, or DSL.
+language, a so called Domain Specific Language, or DSL.~\cite{van2000domain}
 In this thesis we wish to investigate how a DSL
 corresponding the mathematics used can improve an existing software project.
 
-% --- Maybe not use this paragraph.
-% Programming language research has always been about pushing the human-machine
-% boundary closer to human understanding, without losing to much power in the
-% process. The next logical (Yeah strong assumption) step is to embed human
-% domain knowledge inside the language. This has the potential to give many
-% benefits. If the computer can operate on the primitives of a problem it can do
-% optimizations which are unfeasible otherwise.
-
-% --- Maybe good paragraph
-~\cite{van2000domain}
 A DSL is defined over a specific problem domain. The problem domain we choose
 in this investigation, is the automatic solving of Partial Differential
 Equations. (PDEs)
@@ -90,9 +80,6 @@ that a symbolic implementation could both allow for mathematical
 simplifications which improves the precision and allow for automated testing of
 the program.
 
-% [> havent mentioned the solver <]
-% [> numeric vs numerical vs approx <]
-
 % --- Money sentence
 % We wish to leverage Haskell's rich type system to implement a symbolic
 % version.
@@ -108,7 +95,6 @@ want to solve.
 
 % TODO Expand on how to model the problems and algebraic structures. What do we
 % want to model and what are the benefits and problems with that?
-
 This project aims to implement the abstract concepts of FEEC as a symbolical
 DSL for Haskell.  % ↓ Money sentences
 We plan to implement a datatype which better captures the semantics of the
@@ -125,50 +111,6 @@ could allow for better solutions.
 % Polynomial → Monoid → Ring → Field → Vector Space
 % But how do I describe that (which I don't really understand) in a succinct way?
 
-% Something about Bernstein polynomials, Barycentric monomials, Simplexes.
-% A Bernstein polynomial over a Simplex.
-
-
-% I've already said this.
-% The theory of Finite Element Exterior Calculus (FEEC) is a mathematical
-% framework which provides for the discretization of partial differential
-% equations (PDE).
-
-
-% Text from README.md
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% FEECa is a library implementing the mathematical framework that the theory of
-% finite element exterior calculus (FEEC), developed by Arnold, Falk and
-% Winther, provides for the discretization of partial differential equations
-% (PDEs) that allows for a universal treatment of a large number of physical
-% problems.
-
-% FEECa implements the abstract, mathematical concepts of FEEC and provides
-% a full-fledged basis form generated and framework for computations on
-% differential forms. It handles polynomial differential forms in arbitrary
-% dimensions and implements monomial as well as Bernstein bases for
-% polynomials.  The package provides functionality to compute bases of the P_r
-% L^k and P-_r L^k spaces of finite element spaces based on the geometric
-% decomposition proposed by Arnold, Falk and Winther.
-
-
-% Symbolic vs. Numerical. Don't include.
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% When implementing mathematical algorithms on computer there are two main
-% approaches. Model the actual equations for the computer, this gives the
-% possibility to do advanced things, like automatic simplification or
-% differentiation. But it comes with drawback, much slover computation, memory
-% use osv. And it's really hard to do in most programming languages. Or
-% inconvenient to do in most mainstream languages.
-% Numeric on the other hand is supported natively by the computer hardware and is
-% much more efficient. However there is many problems, resolution and
-% rounding-errors and loss of "debuggability".
-
-% Yada, the person which reads this proposal should already know all this? I can
-% just say that symbolic have perks which we want in this implementation.
-
-% But maybe this part
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 A symbolic implementation models the structure of the input in the program.
 This gives the computer the ability to manipulate not only the values, but the
 structure. This gives us the ability to optimize the input expressions to
@@ -181,49 +123,16 @@ the numerical accuracy and mathematical performance of the solver.
 % %%% What problem exists? What are the current solutions and their drawbacks?
 
 
-
-% \section{Context}
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Use one or two relevant and high quality references for providing evidence from
-% the literature that the proposed study indeed includes scientific and
-% engineering challenges, or is related to existing ones. Convince the reader
-% that the problem addressed in this thesis has not been solved prior to this
-% project.
-
-
-
 \section{Goals and Challenges}
 % Describe your contribution with respect to concepts, theory and technical
 % goals. Ensure that the scientific and engineering challenges stand out so that
 % the reader can easily recognize that you are planning to solve an advanced
 % problem.
 
-% Goals
-% =====
-
-% To implement a symbolic datatype for the FEECa project. And show that it
-% improves results. Or allows for automated testing of correctness proofs.
-
-% TODO This first sentence is the money sentence. Is this really the problem
-% we're solving. Is it the most succinct problem-formulation?
-% The goal is the implement a symbolic functional version of Finite Exterior
-% Calculus. This is partly a restatement of what is said in the introduction,
-% but that is probably as it should be.
-
 The goal is the implement a symbolic functional version of Finite Exterior
 Calculus.  Then we can optimize the symbolic expressions to improve their
 numerical accuracy in the solver. This is because different optimizations are
 possible when the computer has knowledge of the expressions structure.
-
-% Either by showing that the symbolic implementation allows for algebraic
-% simplifications which improves the results.
-% Or that the Haskell implementation allows us to use automated verification to
-% prove the implementation correct.
-
-% TODO Decide if algebraic simplification or automated testing is the main
-% focus, discuss with Patrik.
-% Await answer from Patrik.
 
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -235,9 +144,6 @@ possible when the computer has knowledge of the expressions structure.
 
 % Challanges
 % ==========
-% TODO Maybe describe the available code and info more? More clearly at least.
-% There is a half finished but abandoned project available, it is probably in
-% worse state the expected.
 There is a functional, but not symbolic, implementation available from
 a previous project. This can be a starting point, but is also a liability.
 It is impossible to do a complete investigation of the available code at this stage.  This is a uncertainty in the project.
@@ -251,73 +157,26 @@ It is impossible to do a complete investigation of the available code at this st
 % explain how you will analyze the data, in order to address your challenges and
 % project goals.
 
-% One scientific approach is to use formal models and rigorous mathematical
-% argumentation to address aspects like correctness and efficiency. If this is
-% relevant, describe the related algorithmic subjects, and how you plan to
-% address the studied problem. For example, if your plan is to study the problem
-% from a computability aspect, address the relevant issues, such as algorithm and
-% data structure design, complexity analysis, etc.  If you plan to develop and
-% evaluate a prototype, briefly describe your plans to design, implement, and
-% evaluate your prototype by reviewing at most two relevant issues, such as key
-% functionalities and their evaluation criteria.
-
-% The design and implementation should specify prototype properties, such as
-% functionalities and performance goals, e.g., scalability, memory, energy.
-% Motivate key design selection, with respect to state of the art and existing
-% platforms, libraries, etc.
-
-% When discussing evaluation criteria, describe the testing environment, e.g.,
-% test-bed experiments, simulation, and user studies, which you plan to use when
-% assessing your prototype. Specify key tools, and preliminary test-case
-% scenarios. Explain how and why you plan to use the evaluation criteria in order
-% to demonstrate the functionalities and design goals. Explain how you plan to
-% compare your prototype to the state of the art using the proposed test-case
-% evaluation scenarios and benchmarks.
-
-
-% TODO Is usability a goal? Or only "power" of the embedding?
-% How do you talk about "usability" in PL research settings?
 The first step is to find a suitable embedding, in practice this means
 designing a hierarchy of data-types with a good correspondent to our problem
 domain.  We need to evaluate which algebraic structures gives us the needed
 semantics. The next step is to implement this datatype, possibly by extending
 the available FEECa implementation.
-% Should I really start from the current FEECa or should I start separately
-% and then integrate that code with my DSL and embeddings? I don't think
-% I should include that in the proposal.
 
 The evaluation will be done by comparing the results of our Symbolic FEEC
 implementation with the FEniCS implementation. If our thesis is correct the
 numerical accuracy can be improved without loosing to much performance.
-
-% The ambition is to use automated
-% testing, for example with QuickCheck,~\cite{claessen_quickcheck_2000}.
-% TODO Again, decide if simplification or testing is the main goal of all this.
+The ambition is to use automated testing, for example with
+QuickCheck,~\cite{claessen_quickcheck_2000} to show the we improve accuracy in
+many cases.
 
 % TODO End the conclusion with what we wish to achieve, is that a good way?
 % Nope.
-
 
 % Maybe to broad.
 The ambition is to show that a good symbolic representation of the mathematical
 problem yields significant improvements. Therefore showing that a symbolical DSL
 is a powerful tool in numerical software.
-
-
-% TODO this is a total aside, maybe interesting thoughts, but it does not
-% belong in the conclusion. This as well, probably not good to include here in
-% the proposal.
-
-% It would also be very interesting to try to prove the correctness of the
-% implementation. To do it completely is almost impossible but only proving some
-% part could potentially find many bugs in the main implementation.
-
-
-% TODO What is missing from this draft, except for the TODOs above?
-% I'm not sure.
-% The TODOs are better now, so maybe I only need to fix them now, and then be
-% done.
-
 
 \bibliographystyle{plain}
 
