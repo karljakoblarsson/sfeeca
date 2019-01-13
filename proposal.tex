@@ -75,21 +75,21 @@ simplifications which improves the precision and allow for automated testing of
 the program.
 
 
-% During that project they have developed Finite Element Exterior -->
-% [> havent mentioned the solver <] -->
-% Calculus FEEC \ref{winter} as a intermediate building block for the solver.  In -->
-% addition to the main implementation in C++ there exists a work-in-progress -->
-% functional implementation in Haskell \ref{feeca}. The current implementation is -->
-% [> numeric vs numerical vs approx <] -->
-% numeric. We wish to leverage Haskell's rich type system to implement a symbolic -->
-% version. -->
+% During that project they have developed Finite Element Exterior
+% [> havent mentioned the solver <]
+% Calculus FEEC \ref{winter} as a intermediate building block for the solver.  In
+% addition to the main implementation in C++ there exists a work-in-progress
+% functional implementation in Haskell \ref{feeca}. The current implementation is
+% [> numeric vs numerical vs approx <]
+% numeric. We wish to leverage Haskell's rich type system to implement a symbolic
+% version.
 
 
-% [> DSL <] -->
-% A symbolic Domain Specific Language would allow many algebraic manipulations -->
-% which could improve the output. It could also enable use of automatic theorem -->
-% provers to guarantee correctness. This could find bugs which would benefit the -->
-% main implementation. -->
+% [> DSL <]
+% A symbolic Domain Specific Language would allow many algebraic manipulations
+% which could improve the output. It could also enable use of automatic theorem
+% provers to guarantee correctness. This could find bugs which would benefit the
+% main implementation.
 
 % The current implementation Finite Element Exterior Calculus in Haskell (FEECa)
 % uses machine-bound Int64 as the main datatype. Our plan is to implement
@@ -99,20 +99,67 @@ the program.
 
 % TODO To say that the compiler could catch purley mathematical errors in the
 % input is a very strong statement and maybe not true.
-A DSL which leverages Haskell's type system has many advantages in theory. If
-implemented correctly, the compiler could catch purely mathematical errors in
-the input. The naive approach is to implement the algebraic structures used
-as types. However, solving of Partial Differential Equations usually involves
-taking the magnitude of vectors. The implementation of magnitude uses the
-square root which is not available in the common algebraic structures. This is
-a big problem in this project.
+A DSL which leverages Haskell's type system has many advantages in theory.
+% What advantages?
+
+The naive approach is to implement the algebraic structures used as types.
+polynomials
+
+
+The theory of Finite Element Exterior Calculus (FEEC) is a mathematical
+framework which provides for the discretization of partial differential
+equations (PDE).
+
+This project aims to implement the abstract concepts of FEEC as a symbolical
+DSL for Haskell. For computations on differential forms.
+
+% Text from README.md
+% FEECa is a library implementing the mathematical framework that the theory of
+% finite element exterior calculus (FEEC), developed by Arnold, Falk and
+% Winther, provides for the discretization of partial differential equations
+% (PDEs) that allows for a universal treatment of a large number of physical
+% problems.
+
+% FEECa implements the abstract, mathematical concepts of FEEC and provides
+% a full-fledged basis form generated and framework for computations on
+% differential forms. It handles polynomial differential forms in arbitrary
+% dimensions and implements monomial as well as Bernstein bases for
+% polynomials.  The package provides functionality to compute bases of the P_r
+% L^k and P-_r L^k spaces of finite element spaces based on the geometric
+% decomposition proposed by Arnold, Falk and Winther.
+
+
+% TODO Symbolic vs. Numerical.
+% When implementing mathematical algorithms on computer there are two main
+% approaches. Model the actuall equations for the computer, this gives the
+% possiblity to do advanced things, like automatic simplification or
+% diffferentation. But it comes with drawback, much slover computation, memory
+% use osv. And it's really hard to do in most programming languages. Or
+% inconvenient to do in most mainstream languages.
+
+% Numeric on the otherhand is supported nativley by the computer hardware and is
+% much more efficient. However there is many problems, resolution and
+% rounding-errors and loss of "debuggability".
+
+% Yada, the person which reads this proposal should already know all this? I can
+% just say that symbolic have perks which we want in this implementation.
+
 
 % TODO Expand on how to model the problems and algebraic structures. What do we
 % want to model and what are the benefits and problems with that?
 
-We want to model the structure:
-Polynomial → Monoid → Ring → Field → Vector Space
-But how do I describe that (which I don't really understand) in a succint way?
+% TODO Should I mention that taking the magnitud of things is a problem? Since
+% square root doesn't fit in "good" algebraic structures. But since it is
+% "monotonically increasing/somethinf function", not linear but a one-to-one
+% mapping, it's possible to get around by ignoring it. And then just account for
+% it at the end.
+
+% We want to model the structure:
+% Polynomial → Monoid → Ring → Field → Vector Space
+% But how do I describe that (which I don't really understand) in a succint way?
+
+% Something about Bernstein polynomials, Barycentric monomials, Simplexes.
+% A Bernstein polynomial over a Simplex.
 
 
 
@@ -165,18 +212,19 @@ algebraic simplifications which improves the results. Or that the Haskell
 implementation allows us to use automated verification to prove the
 implementation correct.
 
-% TODO Decide if algebraic simplification or automated testing is the main focus,
-% discuss with Patrik. AAAAARGH!
+% TODO Decide if algebraic simplification or automated testing is the main
+% focus, discuss with Patrik. AAAAARGH!
 
-% Describe your contribution with respect to concepts, theory and technical -->
-% goals. Ensure that the scientific and engineering challenges stand out so that -->
-% the reader can easily recognize that you are planning to solve an advanced -->
-% problem. -->
+% Describe your contribution with respect to concepts, theory and technical
+% goals. Ensure that the scientific and engineering challenges stand out so that
+% the reader can easily recognize that you are planning to solve an advanced
+% problem.
+
 
 % Challanges
 % ==========
 % TODO Maybe describe the availible code and info more? More clearly at least.
-% There is a half finished but abandond project availible, it is probaly in
+% There is a half finished but abandond project availible, it is probably in
 % worse state the expected.
 Since this is a continuation of a previous project, a big challenge is to judge the quality
 of the current FEECa implementation.
@@ -240,7 +288,7 @@ The evaluation will be done by comparing the results of our Symbolic FEECa
 implementation with the main implementation.
 % <!-- more details -->
 The ambition is to use automated
-testing, like QuickCheck,~\cite{claessen_quickcheck_2000} to do this.
+testing, for example with QuickCheck,~\cite{claessen_quickcheck_2000}.
 % TODO Again, decide if simplification or testing is the main goal of all this.
 
 % TODO this is a total aside, maybe interesting thoughts, but it does not
@@ -253,6 +301,8 @@ part could potentially find many bugs in the main implementation.
 
 % TODO What is missing from this draft, except for the TODOs above?
 % I'm not sure.
+% The TODOs are better now, so maybe I only need to fix them now, and then be
+% done.
 
 
 % Ethics
