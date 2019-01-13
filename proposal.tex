@@ -4,6 +4,8 @@
 
 \usepackage{natbib}
 \usepackage{hyperref}
+\usepackage{csquotes}
+\usepackage{listings}
 \usepackage{graphicx}
 \usepackage[colorinlistoftodos]{todonotes}
 % \usepackage{parskip}
@@ -50,6 +52,8 @@ Advanced Functional programming, TDA342 \\
 
 \section{Introduction}
 
+% TODO START HERE Do a complete read through of the pdf-file. Do it now!
+
 % #######
 % Briefly describe and motivate the project, and convince the reader of the
 % importance of the proposed thesis work.  A good introduction will answer these
@@ -60,10 +64,19 @@ Advanced Functional programming, TDA342 \\
 Writing correct software is hard.
 Functional programming proposes several techniques to make it easier.
 One technique is to embed domain specific objects and terms in the programming
-language, a so called Domain Specific Language, or DSL.~\cite{van2000domain}
+language, a so called Domain Specific Language, or DSL.
+\cite{van2000domain} Defines a DSL as:
+
+\begin{displayquote}
+  A domain-specific language (DSL) is a programming language or executable
+  specification language that offers, through appropriate notations and
+  abstractions, expressive power focused on, and usually restricted to,
+  a particular problem domain.
+\end{displayquote}
+
 In this thesis we wish to investigate how a DSL
 corresponding the mathematics used can improve an existing software project.
-
+% TODO Should this be the same paragraph?
 A DSL is defined over a specific problem domain. The problem domain we choose
 in this investigation, is the automatic solving of Partial Differential
 Equations. (PDEs)
@@ -86,11 +99,12 @@ the program.
 
 % ↓ This is true at least. A FEECa Simplex is bound to `Int`, and the simplex
 % is one of the "foundation" types.
-The FEECa implementation is bound very hard to the specific type `Int` which in
-Haskell is a machine-bound integer type. This is suboptimal. If the
-implementation is polymorphic in numeric types, it would be possibly to use
-a more specific numeric type which is appropriate to the specific instance you
-want to solve.
+% TODO Probably move this to later in the proposal.
+The FEECa implementation is bound very hard to the specific type
+\lstinline{Int} which in Haskell is a machine-bound integer type. This is
+suboptimal.  If the implementation is polymorphic in numeric types, it would be
+possibly to use a more specific numeric type which is appropriate to the
+specific instance you want to solve.
 
 
 % TODO Expand on how to model the problems and algebraic structures. What do we
@@ -157,6 +171,8 @@ It is impossible to do a complete investigation of the available code at this st
 % explain how you will analyze the data, in order to address your challenges and
 % project goals.
 
+% TODO Expand this section.
+% But it is hard to have a plan in this stage.
 The first step is to find a suitable embedding, in practice this means
 designing a hierarchy of data-types with a good correspondent to our problem
 domain.  We need to evaluate which algebraic structures gives us the needed
