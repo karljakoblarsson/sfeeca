@@ -19,28 +19,36 @@
 \begin{titlepage}
 
 \centering
-{\scshape\LARGE Master thesis project proposal\\}
+{\scshape\LARGE Master thesis project proposal}
+
 \vspace{0.5cm}
-{\huge\bfseries Symbolic Functional FEEC\\}
+{\huge\bfseries Symbolic Functional FEEC}
+
 \vspace{2cm}
-{\Large Jakob Larsson <jakob@karljakoblarsson.com>\\}
+{\Large Jakob Larsson \texttt{<jakob@karljakoblarsson.com>}}
+
 \vspace{1.0cm}
-{\large Suggested Supervisor at CSE: Patrik Jansson \\}
+{\large Suggested Supervisor at CSE: Patrik Jansson }
+
 % \vspace{1.5cm}
-% {\large Supervisor at Company (if applicable): Name of supervisor, name of company\\}
+% {\large Supervisor at Company (if applicable): Name of supervisor, name of company}
+
 \vspace{1.5cm}
-{\large Relevant completed courses:\par}
+{\large Relevant completed courses:}
+
 {\itshape
 Types for Programs and Proofs, DAT350 \\
 Advanced Functional programming, TDA342 \\
 }
 % \vspace{1.5cm}
 % {\large Relevant completed courses student 2:\par}
-% {\itshape List (course code, name of course)\\}
+% {\itshape List (course code, name of course)}
+
 % \vfill
 
 \vfill
-{\large \today\\}
+{\large \today}
+
 \end{titlepage}
 
 
@@ -60,25 +68,27 @@ Advanced Functional programming, TDA342 \\
 Writing correct software is hard.
 Functional programming proposes several techniques to make it easier.
 One technique is to embed domain specific objects and terms in the programming
-language, a so called Domain Specific Language, or DSL.~\cite{van2000domain}
+language, to make a so called Domain Specific Language, or DSL.~\cite{van2000domain}
 In this thesis we wish to investigate how a DSL
-corresponding the mathematics used can improve an existing software project.
+for mathematics can improve an existing software project.
 
 A DSL is defined over a specific problem domain. The problem domain we choose
 in this investigation, is the automatic solving of Partial Differential
-Equations. (PDEs)
+Equations (PDEs).
 
 % Start with FEEC then FEniCS? Or Start with PDE and the FEniCS and then FEEC?
-FEniCS~\cite{AlnaesBlechta2015a} is a project which aim to develop a automatic
-solver for Partial Differential Equations. The current solver is written in C++
-with an interface in Python. A intermediate description of the problems
-involved is Finite Element Exterior Calculus, or FEEC.~\cite{arnold2006finite}
-There exists a functional implementation of FEEC written in Haskell called
-FEECa~\footnote{https://github.com/Airini/FEECa}.  However the implementation
-is numerical, we wish to investigate a symbolic implementation.  The thesis is
-that a symbolic implementation could both allow for mathematical
-simplifications which improves the precision and allow for automated testing of
-the program.
+FEniCS~\cite{AlnaesBlechta2015a} is a project which aim to develop an
+automatic solver for Partial Differential Equations. The current
+solver is written in C++ with an interface in Python. One component of
+FEniCS is the discretization of the PDEs and the mathematical theory
+involved is Finite Element Exterior Calculus, or
+FEEC~\cite{arnold2006finite}. There exists a prototype functional
+implementation of FEEC written in Haskell called
+FEECa~\footnote{https://github.com/Airini/FEECa}.  However the
+implementation is numerical, whereas we wish to investigate a symbolic
+implementation.  The thesis is that a symbolic implementation could
+both allow for mathematical simplifications which improves the
+precision and allow for automated testing of the program.
 
 % --- Money sentence
 % We wish to leverage Haskell's rich type system to implement a symbolic
@@ -86,11 +96,12 @@ the program.
 
 % ↓ This is true at least. A FEECa Simplex is bound to `Int`, and the simplex
 % is one of the "foundation" types.
-The FEECa implementation is bound very hard to the specific type `Int` which in
-Haskell is a machine-bound integer type. This is suboptimal. If the
-implementation is polymorphic in numeric types, it would be possibly to use
-a more specific numeric type which is appropriate to the specific instance you
-want to solve.
+Most of the FEECa implementation is bound to the specific type
+`Double` (double precision floating point). This is suboptimal. If the
+implementation would be polymorphic in numeric types, it would be
+possibly to use other numeric types, like rationals for exact testing,
+and fully symbolic expressions for proving correctness or improving
+the accuracy.
 
 
 % TODO Expand on how to model the problems and algebraic structures. What do we
@@ -111,11 +122,13 @@ could allow for better solutions.
 % Polynomial → Monoid → Ring → Field → Vector Space
 % But how do I describe that (which I don't really understand) in a succinct way?
 
-A symbolic implementation models the structure of the input in the program.
-This gives the computer the ability to manipulate not only the values, but the
-structure. This gives us the ability to optimize the input expressions to
-a structure that is better for the solver. Our thesis is that this will improve
-the numerical accuracy and mathematical performance of the solver.
+A symbolic implementation models the structure of the input in the
+program.  This gives the computer the ability to manipulate not only
+the values, but the structure. This could give us the ability to
+optimize the input expressions to a structure that is better for the
+solver. Our thesis is that this will improve the numerical accuracy
+and mathematical performance of the solver.
+%TODO: Perhaps mention improved confidence in the results [by testing and proving]
 
 
 % %%% Why is the planned research a significant step forward? What are the
@@ -129,11 +142,11 @@ the numerical accuracy and mathematical performance of the solver.
 % the reader can easily recognize that you are planning to solve an advanced
 % problem.
 
-The goal is the implement a symbolic functional version of Finite Exterior
-Calculus.  Then we can optimize the symbolic expressions to improve their
-numerical accuracy in the solver. This is because different optimizations are
-possible when the computer has knowledge of the expressions structure.
-
+The goal is to implement a symbolic functional version of Finite
+Element Exterior Calculus.  Then we can optimize the symbolic expressions to
+improve their numerical accuracy in the solver. This is because
+different optimizations are possible when the computer has knowledge
+of the expressions structure.
 
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Describe your contribution with respect to concepts, theory and technical
@@ -144,9 +157,11 @@ possible when the computer has knowledge of the expressions structure.
 
 % Challanges
 % ==========
-There is a functional, but not symbolic, implementation available from
-a previous project. This can be a starting point, but is also a liability.
-It is impossible to do a complete investigation of the available code at this stage.  This is a uncertainty in the project.
+There is a functional numeric, but not symbolic, implementation
+available from a previous project. This can be a starting point, but
+is also a liability.  It is impossible to do a complete investigation
+of the available code at this stage.  This is a uncertainty in the
+project.
 
 
 \section{Approach}
@@ -177,6 +192,8 @@ many cases.
 The ambition is to show that a good symbolic representation of the mathematical
 problem yields significant improvements. Therefore showing that a symbolical DSL
 is a powerful tool in numerical software.
+%TODO: I'm not sure about this goal formulation. I'd propose to head more in the direction of understanding, correctness, and design patterns: how can a "numeric" library be liberated from the yoke of monomorphism and soar free in a polymorphic / symbolic setting. [don't use these exact words;-]
+
 
 \bibliographystyle{plain}
 
