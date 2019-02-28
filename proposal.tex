@@ -47,10 +47,66 @@ Advanced Functional programming, TDA342 \\
 \end{titlepage}
 
 
-% Draft 4
+% Draft 5 New after meeting with Suprevisor
 %
 %
 
+\section{Introduction}
+\section{Goals and Challenges}
+\section{Approach}
+
+Writing correct software is hard.  Functional programming proposes several
+techniques to make it easier.  One technique is to embed domain specific
+objects and terms in the programming language, to make a so called Domain
+Specific Language, or DSL.~\cite{van2000domain} In this thesis we wish to
+investigate how a DSL for mathematics can improve an existing software project.
+
+
+
+Implement a mathematical theory.
+In a conventional implementation it is hard to debug mathematical errors.
+If we instead model the mathematical theory using types and typeclasses we can
+use automated testing and proving.
+This is a case study in such a implementation.
+We want to model Polynomial → Monoid → Ring → Field → Vector Space in some way.
+Or Barycentric Coords → Bernstein Polynomials → Simplices, stuff from the
+actual theory.
+When modeling the actual mathematical terms as polymorphic types over the
+underlying number implementation, we can test using a exact type like
+rationals, but run using a fast type like doubles.
+
+This is about understanding of the mathematics.
+
+Is there anything to gain by modeling the structure "below" and not just the
+terms currently of interest?
+
+Hopefully we can test invariants of the implementation using QuickCheck.
+
+Elevator pitch: "Debugging mathematics is hard, use functional programming"
+
+"Implementing a mathematical theory as a DSL"
+
+"Implementing a mathematical theory from the ground up"
+
+"Model the actual algebra as types and typeclasses"
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% OLD
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
 % #######
@@ -60,14 +116,6 @@ Advanced Functional programming, TDA342 \\
 % knowledge in the studied domain? How and where can this new knowledge be
 % applied?
 
-% \cite{van2000domain} Defines a DSL as:
-
-% \begin{displayquote}
-%   A domain-specific language (DSL) is a programming language or executable
-%   specification language that offers, through appropriate notations and
-%   abstractions, expressive power focused on, and usually restricted to,
-%   a particular problem domain.
-% \end{displayquote}
 
 Writing correct software is hard.  Functional programming proposes several
 techniques to make it easier.  One technique is to embed domain specific
