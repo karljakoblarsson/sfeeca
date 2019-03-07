@@ -1,0 +1,90 @@
+Från NAD (examinator):
+
+Några kommentarer:
+
+* Vad exakt menar du med att implementationen ska vara symbolisk?
+  Jag kan väldigt lite om FEEC, kan du visa med ett enkelt exempel hur
+  din implementation ska skilja sig från de tidigare?
+
+* Det sista målet är kanske lite väl högt ställt, men också ganska vagt.
+
+  Vad menar du till exempel med att öka abstraktionsnivån och
+  uttrycksfullheten?
+
+  Handlar det om något annat än att du tänker göra det möjligt att
+  byta ut Double mot andra typer?
+
+Det nya projektförslaget är väldigt kortfattat. Istället för att svara
+på mina frågor så tog du bort stora stycken.
+
+I det nya förslaget låter det som att du tänker implementera något i
+stil med FEECa, men med mer polymorfism. Jag tycker att det låter
+alldeles för enkelt för ett exjobb.
+
+Om du inte kan besvara följande fråga, som jag ställde redan förra
+gången, så tror jag inte jag kan godkänna ditt förslag: Kan du visa med
+ett enkelt exempel hur din implementation ska skilja sig från de
+tidigare?
+
+--
+/NAD
+
+TODO Enkelt exempel till NAD
+  TODO: triviala exempel som första steg (med styntaxträd som input)
+TODO Some "research questions"
+
+
+-- base level:
+data Ring where
+  Add :: Ring -> Ring -> Ring
+  Zero :: Ring
+  AddInv :: Ring -> Ring
+
+  Mul :: Ring -> Ring -> Ring
+  One :: Ring
+
+-- could also include variables
+
+data R v where
+  Add :: R v -> R v -> R v
+  Zero :: R v
+  AddInv :: R v -> R v
+
+  Mul :: R v -> R v -> R v
+  One :: R v
+
+  V :: v -> R v  -- to express laws easily
+
+Example:
+comm = Add x y === Add y x
+  where x:y:_ = map V [0..]
+
+instance Ring (R v) where
+  add = Add; -- ...
+
+----------------
+
+-- Research questions? What happens when you move to VectorSpace which has both scalars and vectors
+
+class Vector v where
+  type Scalar v
+  zeroV   :: v
+
+  addV    :: v -> v -> v
+  scaleV  :: Scalar v -> v -> v
+
+  -- Laws: ...  linearity, comm., assoc., ...
+
+  -- Num := Field? Ring?
+addInvV :: (Vector v, Num (Scalar v)) => v -> v
+addInvV = scaleV (-1)
+
+data Vector s w where
+  ZeroV :: Vector s w
+  AddV  :: Vector s w -> Vector s w -> Vector s w
+  ScaleV:: s -> Vector s w
+
+-- Forms, Alternating forms, Differential forms, etc.
+-- Simplices  (almost types of forms)
+
+-- Perhaps useful (Ring solver): https://lists.chalmers.se/pipermail/agda/2010/001681.html
