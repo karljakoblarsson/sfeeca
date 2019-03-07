@@ -24,7 +24,7 @@
 {\scshape\LARGE Master thesis project proposal}
 
 \vspace{0.5cm}
-{\huge\bfseries Symbolic Functional FEEC}
+{\huge\bfseries A Functional Implementation of Finite Element Exterior Calculus}
 
 \vspace{2cm}
 {\Large Jakob Larsson \texttt{<jakob@karljakoblarsson.com>}}
@@ -51,218 +51,88 @@ Advanced Functional programming, TDA342 \\
 %
 %
 
-\section{Introduction}
-\section{Goals and Challenges}
-\section{Approach}
+% \section{Introduction}
 
 Writing correct software is hard.  Functional programming proposes several
 techniques to make it easier.  One technique is to embed domain specific
 objects and terms in the programming language, to make a so called Domain
-Specific Language, or DSL.~\cite{van2000domain} In this thesis we wish to
-investigate how a DSL for mathematics can improve an existing software project.
+Specific Language, or DSL.~\cite{van2000domain}
+
+% In this thesis we wish to
+% investigate how a DSL for mathematics can improve an existing software project.
+
+When implementing mathematical software, there can be two classes of bugs, both
+"normal" bugs and mathematical errors. Functional programming offer several
+tools to deal with the first kind. The second kind however, is harder to
+combat. It is often hard to differentiate between the correct set of numbers
+and the wrong in the answer. Our thesis is that we can model the actual algebra
+and mathematical theory as a Haskell DSL with types and typeclasses. This
+could allow the compiler to catch mathematical errors.
+
+
+This thesis is intended as a case study for implementing a mathematical theory
+as a Haskell DSL. The theory chosen is Finite Element Exterior Calculus
+(FEEC)~\cite{arnold2006finite}. FEEC is a useful tool when solving Partial
+Differential Equations.  There exists a prototype functional implementation of
+FEEC written in Haskell called
+FEECa~\footnote{https://github.com/Airini/FEECa}. However, the FEECa
+implementation is bound to the `double` type and is not polymorphic. We wish to
+keep the implementation fully polymorphic in the underlying number type which
+for example would allow for exact testing with rational numbers.
 
 
 
-Implement a mathematical theory.
-In a conventional implementation it is hard to debug mathematical errors.
-If we instead model the mathematical theory using types and typeclasses we can
-use automated testing and proving.
-This is a case study in such a implementation.
-We want to model Polynomial → Monoid → Ring → Field → Vector Space in some way.
-Or Barycentric Coords → Bernstein Polynomials → Simplices, stuff from the
-actual theory.
-When modeling the actual mathematical terms as polymorphic types over the
-underlying number implementation, we can test using a exact type like
-rationals, but run using a fast type like doubles.
+% \section{Goals and Challenges}
 
-This is about understanding of the mathematics.
+The goal is to show how a mathematical theory can be implemented as a Haskell
+DSL and research the benefits. A first step is to use automated testing, with
+QuickCheck,~\cite{claessen_quickcheck_2000}, to verify correctness. In future
+work, dependently typed programming can be used to prove correctness.
 
-Is there anything to gain by modeling the structure "below" and not just the
-terms currently of interest?
 
-Hopefully we can test invariants of the implementation using QuickCheck.
+% \section{Approach}
 
-Elevator pitch: "Debugging mathematics is hard, use functional programming"
+% We want to model Polynomial → Monoid → Ring → Field → Vector Space in some way.
 
-"Implementing a mathematical theory as a DSL"
+The approach is to start by implementing basic mathematical constructs such as
+Monoids, Groups and Rings and continue to more powerful and complicated
+constructs such as Vector spaces. From there we can implement more specific
+datatypes for concepts used in FEEC such as Simplices and Barycentric
+coordinates. We will continuously test invariants for each construct to make sure
+the implementation is correct.
 
-"Implementing a mathematical theory from the ground up"
-
-"Model the actual algebra as types and typeclasses"
+Debugging mathematical errors is hard, we wish to investigate how functional
+tools can increase correctness in the implementation.
 
 
 
+% Implement a mathematical theory.
+% In a conventional implementation it is hard to debug mathematical errors.
+% If we instead model the mathematical theory using types and typeclasses we can
+% use automated testing and proving.
+% This is a case study in such a implementation.
+% We want to model Polynomial → Monoid → Ring → Field → Vector Space in some way.
+% Or Barycentric Coords → Bernstein Polynomials → Simplices, stuff from the
+% actual theory.
+% When modeling the actual mathematical terms as polymorphic types over the
+% underlying number implementation, we can test using a exact type like
+% rationals, but run using a fast type like doubles.
 
+% This is about understanding of the mathematics.
 
+% Is there anything to gain by modeling the structure "below" and not just the
+% terms currently of interest?
 
+% Hopefully we can test invariants of the implementation using QuickCheck.
 
+% Elevator pitch: "Debugging mathematics is hard, use functional programming"
 
+% "Implementing a mathematical theory as a DSL"
 
+% "Implementing a mathematical theory from the ground up"
 
+% "Model the actual algebra as types and typeclasses"
 
-
-
-
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% OLD
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Introduction}
-
-% #######
-% Briefly describe and motivate the project, and convince the reader of the
-% importance of the proposed thesis work.  A good introduction will answer these
-% questions: Why is addressing these challenges significant for gaining new
-% knowledge in the studied domain? How and where can this new knowledge be
-% applied?
-
-
-Writing correct software is hard.  Functional programming proposes several
-techniques to make it easier.  One technique is to embed domain specific
-objects and terms in the programming language, to make a so called Domain
-Specific Language, or DSL.~\cite{van2000domain} In this thesis we wish to
-investigate how a DSL for mathematics can improve an existing software project.
-
-% TODO too much in one paragraph.
-A DSL is defined over a specific problem domain. In this investigation the
-problem domain is automatic solving of Partial Differential Equations (PDEs).
-FEniCS~\cite{AlnaesBlechta2015a} is a project which aim to develop an automatic
-solver for Partial Differential Equations.  The current solver is written in
-C++ with an interface in Python. One component of FEniCS is the discretization
-of the PDEs and the mathematical theory involved is Finite Element Exterior
-Calculus, or FEEC~\cite{arnold2006finite}.  There exists a prototype functional
-implementation of FEEC written in Haskell called
-FEECa~\footnote{https://github.com/Airini/FEECa}.
-% This is written later, but better there.
-% However the implementation is numerical, whereas we wish to investigate
-% a symbolic implementation.
-% Improve the last sentence.
-
-% --- Money sentence
-% We wish to leverage Haskell's rich type system to implement a symbolic
-% version.
-
-Most of the FEECa implementation is bound to the specific type `Double` (double
-precision floating point).  If the implementation would be polymorphic in
-numeric types instead, it would be possibly to use other numeric types, like
-rationals for exact testing, and fully symbolic expressions for proving
-correctness or improving the accuracy.
-
-A symbolic implementation models the structure of the mathematical expressions
-in the input.  This gives the computer the ability to manipulate not only the
-values, but the structure.  This could give us the ability to optimize the
-input expressions written by humans into a structure that is better for the
-solver. It is also more suited for the use of automated testing and proving
-which can improve the confidence in the results.
-% The last sentence is maybe to strong of an assumption.
-%TODO: Perhaps mention improved confidence in the results [by testing and
-%proving] Maybe done.
-
-
-The thesis is that a symbolic implementation would allow mathematical
-simplifications which improves the numerical precision. It could improve the
-correctness of the program by easing the use automated testing and formal
-methods.  We plan to implement a datatype which better captures the semantics
-of the underlying mathematical objects.  The thesis is that a more specific
-datatype could allow for better solutions and that this can be shown by
-automated testing.
-
-
-% TODO Expand on how to model the problems and algebraic structures. What do we
-% want to model and what are the benefits and problems with that?
-% This project aims to implement the abstract concepts of FEEC as a symbolical
-% DSL for Haskell.  % ↓ Money sentences
-
-% TODO Should I mention that taking the magnitude of things is a problem? Since
-% square root doesn't fit in "good" algebraic structures. But since it is
-% "monotonically increasing/something function", not linear but a one-to-one
-% mapping, it's possible to get around by ignoring it. And then just account for
-% it at the end.
-
-% We want to model the structure:
-% Polynomial → Monoid → Ring → Field → Vector Space
-% But how do I describe that (which I don't really understand) in a succinct way?
-
-% %%% Why is the planned research a significant step forward? What are the
-% %%% scientific challenges. What is hard and non-obvious?
-% %%% What problem exists? What are the current solutions and their drawbacks?
-
-
-\section{Goals and Challenges}
-% Describe your contribution with respect to concepts, theory and technical
-% goals. Ensure that the scientific and engineering challenges stand out so that
-% the reader can easily recognize that you are planning to solve an advanced
-% problem.
-
-The goal is to implement a symbolic functional version of Finite
-Element Exterior Calculus.  Then we can optimize the symbolic expressions to
-improve their numerical accuracy in the solver. This is because
-different optimizations are possible when the computer has knowledge
-of the expression structure.
-
-% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Describe your contribution with respect to concepts, theory and technical
-% goals. Ensure that the scientific and engineering challenges stand out so that
-% the reader can easily recognize that you are planning to solve an advanced
-% problem.
-
-
-% Challenges
-% ==========
-There is a functional numeric, but not symbolic, implementation
-available from a previous project. This can be a starting point, but
-is also a liability.  It is impossible to do a complete investigation
-of the available code at this stage.  This is a uncertainty in the
-project.
-
-
-\section{Approach}
-
-% Various scientific approaches are appropriate for different challenges and
-% project goals. Outline and justify the ones that you have selected. For
-% example, when your project considers systematic data collection, you need to
-% explain how you will analyze the data, in order to address your challenges and
-% project goals.
-
-% TODO Expand this section.
-% But it is hard to have a plan in this stage.
-The first step is to find a suitable embedding, in practice this means
-designing a hierarchy of data-types with a good correspondent to our problem
-domain.  We need to evaluate which algebraic structures gives us the needed
-semantics. Then we asses the current functional FEEC implementation, and if
-it is suitable, implement the symbolic datatype by extending it. Otherwise we
-start a new symbolic functional implementation from scratch.
-
-The evaluation will be done by comparing the results of our Symbolic FEEC
-implementation with the main FEniCS implementation.
-The ambition is to use automated testing, for example with
-QuickCheck,~\cite{claessen_quickcheck_2000}.
-If time allows we would like to investigate the use of automated proof
-techniques to prove correctness in parts of the implementation.
-
-%TODO: I'm not sure about this goal formulation. I'd propose to head more in the direction of understanding, correctness, and design patterns: how can a "numeric" library be liberated from the yoke of monomorphism and soar free in a polymorphic / symbolic setting. [don't use these exact words;-]
-% I've started this.
-
-% This is to broad and up in the clouds.
-% The ambition is to show that a symbolic implementation can increase the
-% abstraction level and expressive power of an existing numerical application
-% while improving numerical accuracy. The higher abstraction level should increase
-% correctness and confidence in the results by allowing the use of automated
-% testing and proving.
-
-The ambition is to show that a symbolic representation of the input expressions
-can increase our understanding and allow for simplifications which increase the
-numerical accuracy. And that this can be shown using automated testing.
-
-% allows for automated testing and proving which can
-% increase the correctness of the application.
-
-% Turn a numerical library into a mathematical library which incidentally has
-% good numerical performance.
-
-% "Numerical calculations as a language"
-% "How to turn a numerical library mathematical" % This is a good approach
-% I think.
 
 
 \bibliographystyle{plain}
