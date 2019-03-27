@@ -1,0 +1,83 @@
+\documentclass{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{csquotes}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+% \usepackage{parskip}
+% \setlength{\parskip}{10pt}
+\usepackage{tikz}
+\usetikzlibrary{arrows, decorations.markings}
+\usepackage{chngcntr}
+\counterwithout{figure}{section}
+
+
+\begin{document}
+
+\begin{titlepage}
+
+\centering
+{\scshape\LARGE Master thesis project proposal}
+
+\vspace{0.5cm}
+{\huge\bfseries Feldspar for real-time musical DSP
+  }
+
+\vspace{2cm}
+{\Large Jakob Larsson \texttt{<jakob@karljakoblarsson.com>}}
+
+\vspace{1.0cm}
+{\large Suggested Supervisor at CSE: Patrik Jansson }
+
+% \vspace{1.5cm}
+\vspace{1.5cm}
+{\large Relevant completed courses:}
+
+{\itshape
+Types for Programs and Proofs, DAT350 \\
+Advanced Functional programming, TDA342 \\
+}
+
+\vfill
+{\large \today}
+
+\end{titlepage}
+
+% \section{Introduction}
+
+% \section{Goals and Challenges}
+
+% \section{Approach}
+
+Feldspar~\cite{feldspar} is a embedded Haskell DSL designed to develop correct
+and portable signal processing algorithms in a high-level language.
+Faust~\cite{faust} is a stand-alone functional DSL for developing sound
+synthesis and audio processing with focus on music.
+
+There are several advantages to an embedded DSL compared to a stand-alone.
+First there is no need to redevelop parsing and syntax checking and second, the
+entire host language is available to the user.
+
+Both Feldspar and Faust aims to produce high-performance signal processing code
+for use in embedded systems. This is a duplication of effort. We wish to
+investigate if it is possible to implement something similar to the Faust API
+on top of Feldspar. This would allow us to reuse all the work that has gone
+into optimizing Feldspar.
+
+Faust has a more narrow focus, it aims to implement a smaller subset of
+algorithms the Feldspar, and therefore should produce more optimized code. Can
+we retain these optimization while utilize the ones in Feldspar?
+
+Embedding a DSL in Haskell allows us to use the entire Haskell ecosystem for
+our application. For example to use QuickCheck~\cite{claessen_quickcheck_2000}
+to verify correctness.
+
+\bibliographystyle{plain}
+
+\bibliography{sfeeca}
+
+\end{document}

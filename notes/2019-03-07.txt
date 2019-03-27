@@ -64,7 +64,8 @@ instance Ring (R v) where
 
 ----------------
 
--- Research questions? What happens when you move to VectorSpace which has both scalars and vectors
+-- Research questions? What happens when you move to VectorSpace which has both
+   scalars and vectors
 
 class Vector v where
   type Scalar v

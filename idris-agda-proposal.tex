@@ -1,0 +1,104 @@
+\documentclass{scrartcl}
+
+\usepackage[utf8]{inputenc}
+
+\usepackage{natbib}
+\usepackage{hyperref}
+\usepackage{csquotes}
+\usepackage{listings}
+\usepackage{graphicx}
+\usepackage[colorinlistoftodos]{todonotes}
+% \usepackage{parskip}
+% \setlength{\parskip}{10pt}
+\usepackage{tikz}
+\usetikzlibrary{arrows, decorations.markings}
+\usepackage{chngcntr}
+\counterwithout{figure}{section}
+
+
+\begin{document}
+
+\begin{titlepage}
+
+\centering
+{\scshape\LARGE Master thesis project proposal}
+
+\vspace{0.5cm}
+{\huge\bfseries Source-to-source translation between Agda and Idris
+  }
+
+\vspace{2cm}
+{\Large Jakob Larsson \texttt{<jakob@karljakoblarsson.com>}}
+
+\vspace{1.0cm}
+{\large Suggested Supervisor at CSE: Patrik Jansson }
+
+% \vspace{1.5cm}
+\vspace{1.5cm}
+{\large Relevant completed courses:}
+
+{\itshape
+Types for Programs and Proofs, DAT350 \\
+Advanced Functional programming, TDA342 \\
+}
+
+\vfill
+{\large \today}
+
+\end{titlepage}
+
+% \section{Introduction}
+
+Agda~\cite{agda} and Idris~\cite{idris} are two dependently typed programming
+languages.  Agda is mainly focused on logical soundness and theorem proving
+while Idris prioritizes general purpose programming ahead of proofs. However,
+even with different focus and priorities they have much in common, and their
+features and type systems are similar.
+
+We wish to investigate if it is possible to construct a source to source
+translation of a common subset between the languages. This would allow
+libraries to be reused in both languages. A Idris program may be more easily
+proved in Agda, and a well proven Agda library can use Idris to develop an
+interface to the outside world.  It will also increase confidence if a given
+proof or program is valid in both languages.
+
+
+A start is to compile simple expressions for Int or something similar. And
+show that it can be done. If everything goes well we can use the SDP library
+IdrisLibs as a huge project to test on.
+Start with normal types and functions for simple lambda functions over Int or
+Nat.
+
+A small start is to just transpile small functions with non-dependent types
+over Nat for example. The we can develop the implementation to support bigger
+types and then follow with dependent types.  Functionality which is not
+available in both languages could be represented by holes. That way the user
+can 'easily' implement whats missing.
+
+To test the implementation we need actually used code. A good choice is to use
+the Sequential Decision Problem library IdrisLibs
+~\footnote{https://gitlab.pik-potsdam.de/botta/IdrisLibs} which is one of the
+biggest Idris codebase available. This will guide our implementation by first
+supporting the features used in the core parts of IdrisLibs. And then work to
+support more and more of the library.
+
+A challenge is to find the biggest common subset of the languages. A useful
+transpiler needs to support most widely used features. But there are
+differences between Agda and Idris.
+
+
+% ~\cite{sdpcontrib}
+
+
+
+% \section{Goals and Challenges}
+
+% \section{Approach}
+
+
+
+\bibliographystyle{plain}
+
+\bibliography{sfeeca}
+
+\end{document}
