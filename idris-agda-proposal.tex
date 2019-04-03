@@ -56,34 +56,42 @@ different focus, they have most of their features in common. The type systems
 are very similar.
 
 We wish to investigate if it is possible to construct a source to source
-translation of a common subset between the languages. The first challenge is to
-find a common subset for which it is possible to translate. The task is to
-construct a compiler which handles as much of this subset as possible.
+translation of a common subset from Idris to Agda.  A further goal is to do
+bidirectional translation between the languages, but this is probably too
+ambitious for this project.  The first challenge is to find a common subset for
+which it is possible to translate. The task is to construct a compiler which
+handles as much of this subset as possible.
 
 % Idris to Agda as the main step. Bidirectional is probably hard.
 
+% Målet är att göra översättningen åt båda hållen, fast det kanske är
+% rimligt att fokusera åt ett håll från början. Det är såklart väldigt
+% svårt, kanske omöjligt. Men det är svårt att svara på idag hur svårt
+% det är.
 
-This would allow libraries to be reused in both languages. A Idris program may
-be more easily proved in Agda, and a well proven Agda library can use Idris to
-develop an interface to the outside world.  It will also increase the confidence
-in a given proof if it is valid in both languages.
+This would allow Idris libraries to be reused in Agda. A Idris program may be
+more easily proved in Agda. With bidirectional translation it would be possible
+to use Idris to interface a well-proven Agda program with the world.  It will
+also increase the confidence in a given proof if it is valid in both languages.
 
 A small start is to just transpile small functions with non-dependent types
 over Nat for example. Then we develop the implementation to support bigger
-types. The goal then is to translate dependent types.
-Functionality which is not available in both languages should be represented by
-holes. That way the user can implement whats missing.
+types. The goal then is to translate dependent types.  Functionality which is
+not available in both languages should be represented by holes. That way the
+user can implement whats missing.
 
-To test the implementation we will use the Sequential Decision Problem library IdrisLibs
-~\footnote{https://gitlab.pik-potsdam.de/botta/IdrisLibs} which is one of the
-bigger Idris codebases available. This will guide our implementation by first
-supporting the features used in the core parts of IdrisLibs. And then work to
-support more and more of the library.
+To test the implementation we will use the Sequential Decision Problem library
+IdrisLibs~\footnote{https://gitlab.pik-potsdam.de/botta/IdrisLibs} which is one
+of the bigger Idris codebases available. This will guide our implementation by
+first supporting the features used in the core parts of IdrisLibs. And then
+work to support more and more of the library.
 
-A hard task is to find the biggest common subset of the languages. It is trivial
-to name a few common features, bu a useful compiler needs to support most
-widely used features. But there are incompatible differences between Agda and
-Idris which complicates things.
+If possible we wish to reuse the Idris complier front-end for our
+implementation, but there is always a challenge to interface with existing
+code.  Another hard task is to find the biggest common subset of the languages.
+It is trivial to name a few common features, bu a useful compiler needs to
+support most widely used features. But there are incompatible differences
+between Agda and Idris which complicates things.
 
 % ~\cite{sdpcontrib}
 
