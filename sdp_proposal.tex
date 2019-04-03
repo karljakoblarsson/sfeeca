@@ -24,7 +24,7 @@
 {\scshape\LARGE Master thesis project proposal}
 
 \vspace{0.5cm}
-{\huge\bfseries Source-to-source translation between Agda and Idris
+{\huge\bfseries SDP something something
   }
 
 \vspace{2cm}
@@ -49,12 +49,44 @@ Advanced Functional programming, TDA342 \\
 
 % \section{Introduction}
 
-
-
 % \section{Goals and Challenges}
 
 % \section{Approach}
 
+
+Development of SDP to use interfaces/typeclasses in Idris 2
+
+IdrisLib is an implementation of SDP theory in Idris. It is currently based on
+Idris wholes which is not optimal from a usability standpoint. Idris Interfaces
+or type classes as they are called in Haskell has several advantages. You can
+have several problems instaniated in the same module for example.
+
+Idris 2 development is comming along which can also be used for a new and great
+implementation.
+
+So the question is to port IdrisLibs to Idris 2 and hopefully the world will be
+great again. Or something like that.
+
+Sequential Decision Problems is the problem of finding optimal controls for
+a probleb with rewards and large state space. IdrisLibs has a implementation of
+it.
+
+The current implementation is built upon Idris holes, because typeclasses were
+not very well supported when the implementation happend. But now they are
+better supported so we should use them to have a better implementation.
+
+TODO: implement the SDP IdrisLib with type classes instead of holes. You may
+want several problems implemented in the same module for example. To compare
+them.
+
+Finiteness and Decidability.
+
+The users also have to implement similar boilerplate code over and over. How
+can this be reduced without sacrificing generalness.
+
+https://gitlab.pik-potsdam.de/botta/IdrisLibs
+~\cite{sdpcontrib}
+~\cite{sdpcomp}
 
 
 \bibliographystyle{plain}

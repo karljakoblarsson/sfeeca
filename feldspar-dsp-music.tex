@@ -54,19 +54,20 @@ Advanced Functional programming, TDA342 \\
 % \section{Approach}
 
 Feldspar~\cite{feldspar} is a embedded Haskell DSL designed to develop correct
-and portable signal processing algorithms in a high-level language.
-Faust~\cite{faust} is a stand-alone functional DSL for developing sound
-synthesis and audio processing with focus on music.
+and portable signal processing algorithms.  Faust~\cite{faust} is a stand-alone
+functional DSL for developing sound synthesis and audio processing with focus
+on music.  When implementing a DSL there are two different approaches, embedded
+or stand-alone. Both with different perks and disadvantages.
 
 There are several advantages to an embedded DSL compared to a stand-alone.
 First there is no need to redevelop parsing and syntax checking and second, the
 entire host language is available to the user.
 
-Both Feldspar and Faust aims to produce high-performance signal processing code
+Both Feldspar and Faust aim to produce high-performance signal processing code
 for use in embedded systems. This is a duplication of effort. We wish to
-investigate if it is possible to implement something similar to the Faust API
+investigate if it is possible to implement i library similar to the Faust API
 on top of Feldspar. This would allow us to reuse all the work that has gone
-into optimizing Feldspar.
+into Feldspar.
 
 Faust has a more narrow focus, it aims to implement a smaller subset of
 algorithms the Feldspar, and therefore should produce more optimized code. Can
